@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="es" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <title>Zayas4k Barber — Saca tu cita</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#7C3AED" />
+  <meta name="description" content="Barbería en Ponce, PR. Saca tu cita rápido con Zayas4k: cortes precisos, barba definida y combos.">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Meta viewport con ligera escala de zoom-out -->
+<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+
+  <!-- (Opcional PWA, si ya lo usas) -->
+  <link rel="manifest" href="js/manifest.json">
+  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- HEAD: Reemplaza TODOS tus meta viewport existentes con ESTE BLOQUE (ponerlo lo más arriba posible en <head>) -->
+<meta name="viewport" id="meta-viewport" content="width=device-width, initial-scale=0.92, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
+<script>
+  // Ajusta dinámicamente initial-scale para "zoom out" fino según dispositivo (colocar en <head> justo después del meta)
+  (function(){
+    try {
+      const meta = document.getElementById('meta-viewport') || document.querySelector('meta[name="viewport"]');
+      if (!meta) return;
+      const dpr = window.devicePixelRatio || 1;
+      const vw = Math.min(window.innerWidth || screen.width, screen.width);
+      // valores probados: Pro Max suele tener DPR alto -> bajar más el scale
+      let scale = 0.92;
+      if (dpr >= 3) scale = 0.88;      // pantallas muy densas (Pro Max, S-series Ultra)
+      else if (dpr >= 2) scale = 0.90; // pantallas densas (most Android high-end)
+      else if (vw <= 360) scale = 0.98; // teléfonos muy angostos -> casi sin zoom
+      // aplicamos
+      meta.setAttribute('content', `width=device-width, initial-scale=${scale}, maximum-scale=1.0, user-scalable=0, viewport-fit=cover`);
+    } catch (e) { /* fail silently */ }
+  })();
+</script>
+
+
+  <!-- SEO JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Barbershop",
+    "name": "Zayas4k Barber",
+    "address": { "@type": "PostalAddress", "addressLocality": "Carolina", "addressRegion": "PR", "addressCountry": "US" },
+    "telephone": "+1-787-000-0000",
+    "image": "icons/cover.jpg",
+    "priceRange": "$$",
+    "url": "https://tudominio.com",
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [ "Tuesday","Wednesday","Thursday","Friday","Saturday" ],
+      "opens": "10:00", "closes": "19:00"
+    }]
+  }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="topbar topbar--glow" role="banner">
+  <div class="brand">
+    <div class="logo">
+      <img src="img/zayas4k.png" alt="Zayas4k Barber Logo">
+    </div>
+    <div class="brand-copy">
+      <h1 class="brand-title">Zayas4k Barber</h1>
+      <p class="brand-sub">Carolina, Puerto Rico</p>
+    </div>
+  </div>
+
+    <nav class="main-nav" aria-label="Principal">
+      <a class="nav-link" href="#booking">Reservar</a>
+      <a class="nav-link" href="#servicios">Servicios</a>
+      <a class="nav-link" href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="header-cta">
+      <a class="btn btn-ghost btn-pill" href="tel:+17870000000" aria-label="Llamar">📞 Llamar</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero-cta" aria-labelledby="hero-title">
+    <div class="hero-ink"></div>
+    <div class="hero-wrap container">
+      <div class="hero-copy">
+        <div class="chip">✂️ Barbería • Fades • Beard</div>
+        <h2 id="hero-title" class="hero-title">Saca tu cita <span class="grad">hoy</span></h2>
+        <p class="hero-sub">Cortes precisos, barba definida y combos. Agenda en segundos, recibe recordatorios y paga seguro.</p>
+<div class="hero-buttons">
+  <!-- Instagram Button -->
+  <a id="cta-instagram" class="btn btn-primary btn-lg" href="https://www.instagram.com/zayas4ka" target="_blank" rel="noopener">
+    <!-- SVG Instagram Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px; vertical-align: middle;">
+      <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.334 3.608 1.31.975.975 1.248 2.242 1.31 3.608.058 1.265.069 1.645.069 4.849s-.012 3.584-.07 4.849c-.062 1.366-.334 2.633-1.31 3.608-.975.975-2.242 1.248-3.608 1.31-1.265.058-1.645.069-4.849.069s-3.584-.012-4.849-.07c-1.366-.062-2.633-.334-3.608-1.31-.975-.975-1.248-2.242-1.31-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.334-2.633 1.31-3.608.975-.975 2.242-1.248 3.608-1.31C8.416 2.175 8.796 2.163 12 2.163zm0-2.163C8.741 0 8.332.012 7.052.07 5.78.128 4.642.36 3.678 1.324c-.964.964-1.196 2.102-1.254 3.374C2.012 5.668 2 6.077 2 9.335v5.33c0 3.258.012 3.667.07 4.948.058 1.272.29 2.41 1.254 3.374.964.964 2.102 1.196 3.374 1.254 1.281.058 1.69.07 4.948.07s3.667-.012 4.948-.07c1.272-.058 2.41-.29 3.374-1.254.964-.964 1.196-2.102 1.254-3.374.058-1.281.07-1.69.07-4.948s-.012-3.667-.07-4.948c-.058-1.272-.29-2.41-1.254-3.374-.964-.964-2.102-1.196-3.374-1.254C15.667.012 15.258 0 12 0z"/>
+      <path d="M12 5.838A6.162 6.162 0 1 0 18.162 12 6.169 6.169 0 0 0 12 5.838zm0 10.162A4 4 0 1 1 16 12a4.005 4.005 0 0 1-4 4z"/>
+      <circle cx="18.406" cy="5.594" r="1.44"/>
+    </svg>
+    Instagram
+  </a>
+
+  <!-- WhatsApp Button -->
+  <a id="cta-whatsapp" class="btn btn-ghost btn-lg" href="https://wa.me/17870000000" target="_blank" aria-label="WhatsApp">
+    <!-- SVG WhatsApp Icon -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px; vertical-align: middle;">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.672-1.612-.92-2.206-.242-.579-.487-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.872.118.571-.085 1.758-.718 2.006-1.41.248-.694.248-1.29.173-1.41-.074-.12-.273-.198-.57-.347z"/>
+      <path d="M20.52 3.48A11.865 11.865 0 0 0 12 0C5.373 0 0 5.373 0 12c0 2.113.55 4.083 1.51 5.822L0 24l6.36-1.51A11.936 11.936 0 0 0 12 24c6.627 0 12-5.373 12-12a11.897 11.897 0 0 0-3.48-8.52zM12 22c-1.96 0-3.792-.525-5.36-1.44l-.384-.228-3.777.898.897-3.772-.234-.387C2.525 15.79 2 13.958 2 12 2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10z"/>
+    </svg>
+    WhatsApp
+  </a>
+</div>
+
+        <ul class="hero-perks">
+          <li>⭐ 4.9 rating</li>
+          <li>🗓️ Confirmación inmediata</li>
+          <li>🛡️ No-show, pierde cita</li>
+        </ul>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="blade"></div>
+        <div class="comb"></div>
+        <div class="sheen"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking -->
+  <main id="booking" class="container" role="main">
+    <section class="flow" aria-live="polite">
+      <ol class="steps" aria-label="Progreso de reserva">
+        <li class="step active" data-step="1"><span>Fecha</span></li>
+        <li class="step" data-step="2"><span>Hora</span></li>
+        <li class="step" data-step="3"><span>Datos</span></li>
+        <li class="step" data-step="4"><span>Listo</span></li>
+      </ol>
+
+      <!-- Step 1: Calendario -->
+      <article class="card" aria-labelledby="step1-title">
+        <header class="card-head sticky-head">
+          <h3 id="step1-title">Escoge la fecha</h3>
+          <div class="month-picker" role="group" aria-label="Navegar meses">
+            <button id="prev-month" class="icon-btn" aria-label="Mes anterior">◀</button>
+            <span id="current-month" class="month-label" aria-live="polite"></span>
+            <button id="next-month" class="icon-btn" aria-label="Mes siguiente">▶</button>
+          </div>
+        </header>
+        <div id="calendar" class="calendar-grid" role="grid" aria-label="Calendario de disponibilidad"></div>
+        <div class="legend">
+          <span class="dot dot-red"></span> Lleno
+          <span class="dot dot-orange"></span> Intermedio
+          <span class="dot dot-white"></span> Disponible <span aria-hidden="true">✅</span>
+        </div>
+      </article>
+
+      <!-- Step 2: Horas -->
+      <article class="card" aria-labelledby="step2-title">
+        <header class="card-head">
+          <h3 id="step2-title">Hora</h3>
+        </header>
+
+        <!-- Toolbar con Reiniciar (movido aquí) -->
+      <div class="hours-toolbar">
+  <button id="reset-btn" type="button" class="btn btn-ghost btn-sm">↺ Reset Fecha/Hora</button>
+</div>
+
+
+        <div id="hours" class="hours-grid" role="listbox" aria-label="Horas disponibles"></div>
+      </article>
+
+      <!-- Step 3: Datos -->
+      <article class="card" aria-labelledby="step3-title">
+        <header class="card-head"><h3 id="step3-title">3) Tus datos</h3></header>
+        <form id="client-form" class="form-grid" novalidate>
+          <label>
+            <span>Nombre</span>
+            <input id="clientName" name="name" placeholder="Tu nombre" autocomplete="name" required />
+          </label>
+          <label>
+            <span>Email</span>
+            <input id="clientEmail" name="email" type="email" placeholder="tucorreo@email.com" autocomplete="email" required />
+          </label>
+          <label>
+            <span>Teléfono</span>
+            <input id="clientPhone" name="tel" inputmode="tel" placeholder="+1 787 555 5555" autocomplete="tel" />
+          </label>
+          <label class="full">
+            <span>Servicio</span>
+            <select id="serviceId" required>
+              <option value="" disabled selected>Selecciona un servicio</option>
+              <option value="Corte" data-duration="40" data-price="30">Corte — 40 min — $30</option>
+              <option value="Barba" data-duration="55" data-price="40">Corte Y Barba — 55 min — $40</option>
+              <option value="Combo" data-duration="60" data-price="50">Corte Y Barba con Hot Towel — $50</option>
+              <option value="Combo" data-duration="60" data-price="50">House Call — 60 min — $100</option>
+            </select>
+          </label>
+          <div class="two-col">
+            <label>
+              <span>Duración</span>
+              <input id="serviceDuration" readonly placeholder="—" />
+            </label>
+            <label>
+              <span>Precio</span>
+              <input id="servicePrice" readonly placeholder="—" />
+            </label>
+          </div>
+          <label class="check">
+            <input type="checkbox" id="optIn" />
+            <span>Acepto recibir confirmacion y promos via WhatsApp/SMS</span>
+          </label>
+        </form>
+      </article>
+
+      <!-- Step 4: Confirmar -->
+      <article class="card" aria-labelledby="step4-title">
+        <header class="card-head"><h3 id="step4-title">4) Confirmar</h3></header>
+        <div class="summary" id="summary" aria-live="polite">Selecciona día, hora y servicio para ver el resumen.</div>
+        <div class="actions">
+          <button id="reserve-btn" class="btn btn-primary" disabled>Reservar</button>
+          <button id="add-ics" class="btn btn-ghost" disabled>Añadir a mi calendario</button>
+          <a id="add-google" class="btn btn-ghost disabled" href="#" target="_blank" rel="noopener">Google Calendar</a>
+          <!-- Botón Reiniciar eliminado de aquí para evitar duplicar ID -->
+        </div>
+        <p id="msg" class="status" role="status" aria-live="polite"></p>
+      </article>
+    </section>
+  </main>
+
+  <!-- Servicios -->
+  <section id="servicios" class="container services">
+    <h3 class="section-title">Servicios destacados</h3>
+    <ul class="service-list">
+      <li><span>✂</span> Corte clásico / skin fade — 45 min</li>
+      <li><span>🧔</span> Arreglo de corte y barba con hot towel — 55 min</li>
+      <li><span>💈</span> Combo corte + barba — 60 min</li>
+      <li><span>🏠</span> House Call— 60 min</li>
+    </ul>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer container" id="contacto" role="contentinfo">
+    <div class="footer-grid">
+      <div>
+        <strong class="footer-title">Zayas4k Barber</strong><br>
+        Carolina, Puerto Rico<br>
+        <a class="footer-link" href="tel:+17870000000">+1 (787) 000-0000</a><br>
+        <a id="whats-link" class="footer-link" href="#" target="_blank" rel="noopener">WhatsApp directo</a>
+      </div>
+      <div>
+        <strong class="footer-title">Horario</strong>
+        <ul class="hours">
+          <li>Mar–Sáb: 10:00–7:00</li>
+          <li>Dom–Lun: Cerrado</li>
+        </ul>
+        <a class="map-link" href="https://maps.apple.com/?q=Ponce%20PR" target="_blank" rel="noopener">📍 Abrir en Mapas</a>
+      </div>
+      <div>
+        <strong class="footer-title">Confianza</strong>
+        <ul class="trust">
+          <li>⭐ 4.9 / Clientes felices</li>
+          <li>🔒 Pagos seguros</li>
+          <li>🗓️ Recordatorios por email/SMS</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footnote">
+      <small>© Zayas4k Barber — Depósito 15% en producción. No-show pierde depósito.</small>
+    </div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-hidden="true"></div>
+
+  <script src="js/app.js" defer></script>
+  <script>
+    // Si usas PWA
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
+      });
+    }
+  </script>
+</body>
+</html>

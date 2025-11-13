@@ -1,0 +1,856 @@
+:root{
+  --violet-50:#F5F3FF; --violet-100:#EDE9FE; --violet-200:#DDD6FE; --violet-300:#C4B5FD;
+  --violet-400:#A78BFA; --violet-500:#8B5CF6; --violet-600:#7C3AED; --violet-700:#6D28D9;
+  --violet-800:#5B21B6; --violet-900:#4C1D95;
+
+  --bg:#0b0b12; --card:#11111a; --muted:#a9acc6; --text:#f5f6ff;
+  --ok:#22c55e; --warn:#f59e0b; --bad:#ef4444;
+  --ring: 0 0 0 3px color-mix(in oklab, var(--violet-500) 35%, transparent);
+  --shadow: 0 10px 30px rgba(124,58,237,.25), 0 2px 6px rgba(0,0,0,.3);
+  --radius: 16px;
+
+  --tile-bg: linear-gradient(180deg, rgba(124,58,237,.08), rgba(124,58,237,.04));
+  --tile-br: 1px solid rgba(168,85,247,.22);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial;
+  background:
+    radial-gradient(1300px 600px at 85% -10%, rgba(124,58,237,.22), transparent 60%),
+    radial-gradient(900px 450px at -10% 10%, rgba(168,85,247,.16), transparent 60%),
+    #0b0b12;
+  color:var(--text);
+  line-height:1.45;
+}
+
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+
+/* ================= Header ================= */
+.topbar{
+  position: sticky; top:0; z-index:50;
+  display:flex; align-items:center; gap:16px; justify-content:space-between;
+  padding:12px 16px;
+  background:linear-gradient(180deg, rgba(17,17,26,.9), rgba(17,17,26,.6));
+  backdrop-filter: blur(12px);
+  border-bottom:1px solid rgba(168,85,247,.2);
+}
+.topbar--glow::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background: radial-gradient(500px 140px at 20% 0%, rgba(124,58,237,.22), transparent 60%);
+}
+.brand{display:flex; gap:12px; align-items:center}
+.brand .logo img {
+  width: 60px;     /* ancho deseado */
+  height: auto;    /* mantiene proporción */
+  display: block;
+}
+
+.brand-title{margin:0;font-size:18px}
+.brand-sub{margin:0;color:var(--muted);font-size:12px}
+
+.main-nav{display:flex;gap:12px}
+.nav-link{padding:8px 10px;border-radius:10px;border:1px solid transparent}
+.nav-link:hover{border-color:rgba(168,85,247,.35)}
+.header-cta{display:flex;gap:8px; align-items:center}
+.btn-pill{border-radius:999px}
+
+/* ================= Hero ================= */
+.hero-cta{ position:relative; overflow:hidden; border-bottom:1px solid rgba(168,85,247,.22); }
+.hero-ink{
+  position:absolute; inset:-20% -10% auto -10%; height:380px; z-index:-1;
+  background:
+    radial-gradient(600px 240px at 20% 30%, rgba(139,92,246,.28), transparent 60%),
+    radial-gradient(640px 260px at 70% 50%, rgba(109,40,217,.22), transparent 60%),
+    conic-gradient(from 180deg at 50% 50%, rgba(255,255,255,.06), transparent 30%, rgba(255,255,255,.06));
+  filter: blur(8px);
+}
+.hero-wrap{display:grid; grid-template-columns: 1.1fr .9fr; gap:24px; align-items:center; padding-top:16px}
+.hero-copy .chip{
+  display:inline-block; padding:6px 10px; border-radius:999px;
+  border:1px solid rgba(168,85,247,.35); background:rgba(124,58,237,.10); font-size:.9rem;
+}
+.hero-title{font-size:44px; margin:.5rem 0 .3rem; letter-spacing:.2px}
+.grad{background:linear-gradient(135deg, var(--violet-400), var(--violet-200)); -webkit-background-clip:text; background-clip:text; color:transparent}
+.hero-sub{color:var(--muted); max-width:48ch}
+.hero-buttons{display:flex; gap:12px; margin-top:10px; flex-wrap:wrap}
+.btn-lg{padding:14px 18px; font-size:1.02rem}
+
+.hero-perks{display:flex; gap:16px; list-style:none; padding:0; margin:14px 0 0; color:#d9dbff; opacity:.9; flex-wrap:wrap}
+.hero-art{
+  position:relative; min-height:260px; border-radius:20px;
+  background:linear-gradient(160deg, rgba(255,255,255,.02), rgba(124,58,237,.08));
+  border:1px solid rgba(168,85,247,.28);
+  box-shadow: var(--shadow);
+  overflow:hidden;
+}
+.sheen{position:absolute; inset:0; mix-blend-mode:screen; opacity:.6;
+  background: conic-gradient(from 180deg at 50% 50%, rgba(255,255,255,.08), transparent 30%, rgba(255,255,255,.08));
+  animation: sheen 8s linear infinite;
+}
+.blade,.comb{position:absolute; filter: drop-shadow(0 8px 24px rgba(0,0,0,.35))}
+.blade{
+  width:200px; height:46px; top:28%; left:12%;
+  background: linear-gradient(90deg, #cfcfe8, #eef0ff 40%, #cfcfe8);
+  border-radius:12px; transform: rotate(-12deg);
+}
+.blade::after{
+  content:""; position:absolute; right:10px; top:50%; transform:translateY(-50%);
+  width:20px; height:20px; border-radius:50%; background:#8B5CF6; box-shadow:0 0 0 6px rgba(139,92,246,.25);
+}
+.comb{
+  width:220px; height:18px; bottom:22%; right:10%;
+  background: linear-gradient(90deg, #1b1b28, #232338); border-radius:6px;
+  transform: rotate(14deg);
+  box-shadow: inset 0 -2px 0 rgba(255,255,255,.06);
+}
+.comb::before{
+  content:""; position:absolute; left:10px; right:10px; top:-8px; height:8px;
+  background: repeating-linear-gradient(90deg, #0c0c12 0 6px, transparent 6px 12px);
+}
+@keyframes sheen{to{transform:rotate(1turn)}}
+
+/* ================= Booking ================= */
+#booking{margin-top:8px}
+.steps{display:flex; gap:8px; list-style:none; padding:0; margin:8px 0 12px}
+.step{flex:1; display:grid; place-items:center; padding:10px 8px; border:1px dashed rgba(168,85,247,.28); border-radius:12px; color:var(--muted)}
+.step.active{border-style:solid; color:var(--text); background:linear-gradient(180deg, rgba(124,58,237,.12), rgba(124,58,237,.06))}
+.flow{display:grid; gap:16px; margin:8px 0 32px}
+.card{background:var(--card); border:1px solid rgba(168,85,247,.18); border-radius:var(--radius); padding:18px; box-shadow: var(--shadow)}
+.card-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:12px}
+.sticky-head{position:sticky; top:84px; z-index:40; background:var(--card); border-bottom:1px solid rgba(168,85,247,.12); padding-bottom:10px}
+
+.month-picker{display:flex; gap:8px; align-items:center}
+.icon-btn{appearance:none; border:1px solid rgba(168,85,247,.35); background:transparent; color:var(--text);
+  border-radius:10px; padding:6px 10px; cursor:pointer;}
+.icon-btn:hover{background:rgba(124,58,237,.15)}
+.icon-btn:focus-visible{outline: none; box-shadow: var(--ring)}
+.month-label{min-width:200px;text-align:center;font-weight:700; letter-spacing:.3px}
+
+/* Calendario */
+.calendar-grid{display:grid; gap:8px; margin-top:12px; grid-template-columns: repeat(7, minmax(0,1fr))}
+.calendar-grid .dow{color:var(--muted); font-size:.85rem; text-align:center; padding:4px 0}
+.day{
+  border:var(--tile-br);
+  background:var(--tile-bg);
+  border-radius:12px; padding:8px; text-align:center; cursor:pointer; min-height:70px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.day:hover{ transform: translateY(-1px); }
+.day[aria-disabled="true"]{opacity:.4; cursor:not-allowed}
+.day.selected{outline:none; box-shadow:0 0 0 2px rgba(255,255,255,.85), var(--ring)}
+.day .num{
+  font-weight:700;
+  font-size:1rem;
+  color:#fff;
+}
+
+.badge{font-size:.75rem; padding:2px 8px; border-radius:999px; border:1px solid rgba(255, 255, 255, 0.12)}
+.badge.red{background:rgba(239,68,68,.15); border-color: rgba(239,68,68,.4); color:#fecaca;}
+.badge.orange{background:rgba(245,158,11,.15); border-color: rgba(245,158,11,.45); color:#fde68a;}
+.badge.white{background:rgba(255,255,255,.08); border-color: rgba(255,255,255,.28); color:#fff}
+.badge.white::before{content:"✅ ";}
+
+/* Leyenda */
+.legend{display:flex; gap:16px; align-items:center; color:var(--muted); margin-top:12px}
+.dot{display:inline-block;width:10px;height:10px;border-radius:999px;margin-right:6px; vertical-align:middle}
+.dot-red{background:var(--bad)} .dot-orange{background:var(--warn)} .dot-white{background:#fff; border:1px solid rgba(255,255,255,.4)}
+
+/* Horas */
+/* Grid flexible y cómodo en móvil/escritorio */
+.hours-grid{
+  display:grid;
+  gap:12px;
+  grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+  align-items:stretch;
+}
+
+
+/* Botón de hora: centrado perfecto y toque moderno */
+.hour{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:12px 14px;
+  min-height:44px;            /* objetivo táctil mínimo */
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.22);
+  background:var(--tile-bg);
+  color:#fff;
+  font-weight:600;
+  text-align:center;
+  cursor:pointer;
+  user-select:none;
+  transition:
+    transform .08s ease,
+    box-shadow .2s ease,
+    background-color .2s ease,
+    border-color .2s ease,
+    opacity .2s ease;
+}
+
+/* Hover/Active (solo si no está deshabilitado) */
+.hour:not([aria-disabled="true"]):hover{
+  transform:translateY(-1px);
+  border-color:rgba(255,255,255,.35);
+  box-shadow:0 8px 20px rgba(0,0,0,.15), var(--ring);
+}
+.hour:not([aria-disabled="true"]):active{
+  transform:translateY(0);
+  box-shadow:0 0 0 2px rgba(255,255,255,.85), var(--ring);
+}
+
+ /* Opcional: estilos mínimos para el nuevo toolbar del paso 2 */
+    .hours-toolbar{
+      display:flex;
+      justify-content:flex-end;
+      margin:-4px 0 10px;
+    }
+    .btn.btn-sm{
+      padding:6px 10px;
+      font-size:.9rem;
+      border-radius:10px;
+    }
+
+/* Seleccionado */
+.hour.selected{
+  border-color:rgba(124,58,237,.8);           /* violeta 7C3AED */
+  box-shadow:
+    0 0 0 2px rgba(124,58,237,.9),
+    0 0 0 6px rgba(124,58,237,.25);
+}
+
+/* Accesibilidad: focus claro con teclado */
+.hour:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 2px rgba(255,255,255,.85), var(--ring);
+}
+
+/* Deshabilitado */
+.hour[aria-disabled="true"]{
+  opacity:.45;
+  cursor:not-allowed;
+  pointer-events:none;
+}
+
+/* Estados opcionales por clase (si los usas) */
+.hour.is-full{            /* lleno/rojo */
+  background:rgba(239,68,68,.12);
+  border-color:rgba(239,68,68,.6);
+  color:#fff;
+}
+.hour.is-available{       /* disponible */
+  background:rgba(255,255,255,.06);
+}
+
+/* Form */
+.form-grid{display:grid; gap:12px; grid-template-columns: 1fr 1fr}
+.form-grid .full{grid-column: 1 / -1}
+.form-grid input, .form-grid select{
+  width:100%; padding:12px 12px; border-radius:12px; border:1px solid rgba(168,85,247,.28);
+  background:rgba(255, 255, 255, 0.02); color:var(--text)
+}
+.two-col{display:grid; grid-template-columns: 1fr 1fr; gap:12px}
+.check{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  color:#fff;
+  font-size:.95rem;
+  user-select:none;
+}
+
+/* Ocultamos el checkbox nativo */
+.check input[type="checkbox"]{
+  position:absolute;
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+/* Caja visual del checkbox */
+.check span::before{
+  content:"";
+  display:inline-block;
+  width:18px;
+  height:18px;
+  border-radius:4px;
+  border:2px solid rgba(255,255,255,.5);
+  margin-right:6px;
+  vertical-align:middle;
+  transition:background .2s ease, border-color .2s ease;
+}
+
+/* Cuando está chequeado */
+.check input[type="checkbox"]:checked + span::before{
+  background:#7C3AED;                                 /* violeta */
+  border-color:#7C3AED;
+}
+
+/* Animación de check interno (simple y limpia) */
+.check input[type="checkbox"]:checked + span{
+  font-weight:600;
+}
+
+/* Hover */
+.check:hover span::before{
+  border-color:#fff;
+}
+
+.container{
+  width: calc(100% - 2rem);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* ---- Servicios ---- */
+.services{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius: var(--radius);
+  padding: 1.25rem 1rem;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255,255,255,0.03);
+  margin-bottom: 1.5rem;
+}
+
+/* Título de sección */
+.section-title{
+  font-size: 1.125rem;
+  margin: 0 0 0.75rem 0;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+
+/* Lista de servicios */
+.service-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.service-list li{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--glass);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.03);
+  transition: transform .18s ease, background .18s ease;
+  font-size: 0.98rem;
+  color: var(--text);
+}
+
+/* icono / badge */
+.service-list li > span{
+  display: inline-grid;
+  place-items: center;
+  min-width: 42px;
+  min-height: 42px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+/* hover / focus */
+.service-list li:hover,
+.service-list li:focus-within{
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.025);
+}
+
+/* =========================
+   Footer — estilo profesional
+   ========================= */
+
+/* contenedor principal del footer */
+.footer{
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* grid adaptativo: 1 columna móvil, 3 columnas en tablets+ */
+.footer-grid{
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr; /* móvil */
+  align-items: start;
+}
+@media (min-width: 720px){
+  .footer-grid{
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+/* títulos de columna: claramente visibles pero discretos */
+.footer-title{
+  display:block;
+  font-size: 1.02rem;
+  margin-bottom: 0.45rem;
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* listas internas (horarios, confianza, etc.) */
+.footer .hours,
+.footer .trust{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+.footer .hours li,
+.footer .trust li{
+  margin-bottom: 0.35rem;
+}
+
+/* enlaces: apariencia clara, interacción y foco accesible */
+.footer-link,
+.map-link{
+  display:inline-flex;
+  align-items:center;
+  gap:0.5rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color .16s ease, transform .16s ease, text-decoration-color .16s ease;
+  border-radius: 8px;
+  padding: 3px 4px;
+}
+
+/* hover: color de acento y leve desplazamiento */
+.footer-link:hover,
+.map-link:hover{
+  color: var(--accent);
+  transform: translateX(4px);
+}
+
+/* focus visible (teclado) — fuerte y coherente con el tema */
+.footer-link:focus,
+.map-link:focus{
+  outline: none;
+  box-shadow: var(--ring);
+  transform: none;               /* evitar movimiento al enfocar */
+  border-radius: 8px;
+}
+
+/* marcado del teléfono para móviles: mayor legibilidad */
+.footer-link[href^="tel"]{
+  font-weight:700;
+  color: var(--text);
+}
+.footer-link[href^="tel"]:hover{ color: var(--accent) }
+
+/* link destacado (WhatsApp u CTA pequeño) */
+#whats-link{
+  display:inline-block;
+  margin-top:0.45rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.08), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.025);
+  color: var(--text);
+  font-weight:700;
+  transition: transform .14s ease, box-shadow .14s ease, color .14s ease;
+}
+#whats-link:hover{ transform: translateY(-3px); color: var(--accent) }
+#whats-link:focus{ box-shadow: var(--ring); outline:none }
+
+/* footnote / créditos: más pequeño, menos peso visual */
+.footnote{
+  margin-top: 1rem;
+  padding-top: 0.8rem;
+  border-top: 1px dashed rgba(255,255,255,0.03);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* utilidad: iconos dentro de enlaces (si los añades) */
+.footer .icon{
+  width: 18px; height: 18px; display:inline-grid; place-items:center; font-size:0.95rem;
+  opacity:0.95;
+}
+
+/* soporte para listas sociales en horizontal (opcional) */
+.footer .social{
+  display:flex; gap:8px; align-items:center; margin-top:6px;
+}
+.footer .social a{
+  display:inline-grid; place-items:center; width:36px; height:36px; border-radius:8px;
+  background: rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.02);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.footer .social a:hover{ transform:translateY(-3px); box-shadow:0 8px 20px rgba(0,0,0,.12) }
+
+/* pequeño ajuste para impresión: menos background, alta legibilidad */
+@media print{
+  .footer{ background:transparent !important; box-shadow:none !important; color:#000 !important; border-color:#ddd !important }
+  .footer-link, .map-link{ color:#000 !important; text-decoration:underline; }
+}
+
+/* prefieren menos animación */
+@media (prefers-reduced-motion: reduce){
+  .footer-link, .map-link, .footer .social a{ transition:none !important; transform:none !important; }
+}
+
+/* horas / listas internas */
+.hours, .trust{
+  list-style:none;
+  margin: 0.45rem 0 0 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.hours li, .trust li{ margin-bottom: 0.35rem; }
+
+/* WhatsApp destacado */
+#whats-link{
+  display:inline-block;
+  margin-top:0.35rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.18), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.03);
+  color:var(--white);
+  text-decoration:none;
+  font-weight:600;
+  box-shadow: 0 6px 18px rgba(9,30,60,0.4);
+}
+#whats-link:focus, #whats-link:hover{
+  transform: translateY(-3px);
+  color:var(--accent);
+}
+
+/* footnote */
+.footnote{
+  margin-top: 0.9rem;
+  border-top: 1px dashed rgba(255,255,255,0.03);
+  padding-top: 0.8rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+
+/* ---- Accesibilidad: foco visible ---- */
+a:focus, button:focus, .service-list li:focus {
+  outline: 3px solid rgba(255,183,3,0.18);
+  outline-offset: 3px;
+}
+
+/* ---- Pequeñas utilidades ---- */
+.muted { color: var(--muted); font-size:0.95rem; }
+.center { text-align:center; }
+
+
+/* Acciones / Resumen */
+.summary{padding:12px; background:rgba(124,58,237,.08); border:1px dashed rgba(168,85,247,.32); border-radius:12px}
+.actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+.btn{appearance:none; border:1px solid rgba(168,85,247,.35); background:rgba(124,58,237,.12);
+  padding:10px 14px; border-radius:12px; color:var(--text); cursor:pointer}
+.btn-primary{background:linear-gradient(135deg, var(--violet-700), var(--violet-500)); border-color:transparent}
+.btn-ghost{background:transparent}
+.btn-block{width:100%}
+.btn:disabled,.disabled{opacity:.5; pointer-events:none}
+
+
+/* Utilidades */
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+
+/* Toast y FAB */
+.toast{position:fixed; left:50%; bottom:20px; transform:translateX(-50%); background:#1b1b28; padding:10px 14px; border-radius:10px; border:1px solid rgba(168,85,247,.3); box-shadow:var(--shadow); opacity:0; pointer-events:none; transition:opacity .15s}
+.toast.show{opacity:1}
+.sticky-cta{position:fixed; right:18px; bottom:18px; display:flex; gap:10px}
+.fab{display:grid;place-items:center;width:46px;height:46px;border-radius:999px;background:#1a1a26;border:1px solid rgba(168,85,247,.3)}
+
+/* -------------------------
+  Responsive adaptions (PEGA AL FINAL del CSS)
+  - Asegura correcto layout en iPhone, Android y tablets
+  - Evita overflow horizontal y reflowa componentes
+  ------------------------- */
+
+/* Prevent horizontal overflow on all devices */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Safe-area padding (notch) */
+:root {
+  --safe-pad-left: env(safe-area-inset-left, 0px);
+  --safe-pad-right: env(safe-area-inset-right, 0px);
+}
+.container {
+  padding-left: calc(1rem + var(--safe-pad-left));
+  padding-right: calc(1rem + var(--safe-pad-right));
+}
+
+/* Flexible header: allow wrap and stacking on very small widths */
+.topbar {
+  gap: 12px;
+  padding-left: calc(12px + var(--safe-pad-left));
+  padding-right: calc(12px + var(--safe-pad-right));
+  align-items: center;
+}
+.brand { min-width: 0; }
+.brand-copy { min-width: 0; }
+
+/* Nav should wrap instead of overflow; CTAs move below on small screens */
+.main-nav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.header-cta {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Ensure logo and text align and shrink gracefully */
+.brand .logo { flex: 0 0 auto; display:flex; align-items:center; justify-content:center; }
+.brand .logo img { width: 60px; height: auto; display:block; }
+.brand-copy { display:flex; flex-direction:column; min-width:0; }
+.brand-title, .brand-sub { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+/* Hero: single column under 920px, scale art and reduce padding */
+.hero-wrap { display:grid; grid-template-columns: 1.1fr .9fr; gap:24px; align-items:center; }
+@media (max-width: 920px) {
+  .hero-wrap { grid-template-columns: 1fr; gap:14px; padding-top:10px; }
+  .hero-title { font-size: clamp(1.25rem, 6.5vw, 2rem); line-height:1.05; }
+  .hero-sub { font-size: 0.95rem; max-width: 100%; }
+  .hero-art { min-height: 180px; border-radius:12px; }
+  .blade { width: 42%; left: 6%; top: 18%; transform: rotate(-10deg); }
+  .comb  { width: 50%; right: 6%; bottom: 16%; transform: rotate(10deg); }
+}
+
+/* Very small phones adjustments */
+@media (max-width: 380px) {
+  .brand .logo img { width: 48px; }
+  .hero-title { font-size: 1.2rem; }
+  .hero-buttons { gap:8px; }
+  .btn-lg { padding:10px 12px; font-size:.95rem; }
+  .hero-art { min-height:150px; }
+}
+
+/* Make sure decorative pseudo elements don't overflow viewport */
+.hero-ink, .topbar--glow::after {
+  max-width: 100%;
+  left: 0;
+  right: 0;
+}
+
+/* Calendar: keep 7 columns visually but prevent overflow by allowing tile wrap */
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+}
+@media (max-width: 520px) {
+  .calendar-grid { gap:6px; }
+  .calendar-grid .dow { font-size: .75rem; padding:4px 2px; }
+  .day { min-height: 56px; padding:6px; }
+  .day .num { font-size:.95rem; }
+}
+
+/* Hours grid: responsive columns */
+.hours-grid {
+  grid-template-columns: repeat(auto-fit, minmax(96px, 1fr));
+  gap: 10px;
+}
+@media (max-width: 420px) {
+  .hours-grid { grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap:8px; }
+  .hour { padding:10px 8px; font-size:.95rem; min-height:44px; }
+}
+
+/* Service list: single column on small screens */
+@media (max-width: 700px) {
+  .service-list { grid-template-columns: 1fr; gap:8px; }
+  .service-list li { padding: 10px; font-size: .98rem; }
+}
+
+/* Cards and containers: reduce padding on small widths */
+@media (max-width: 520px) {
+  .card { padding: 12px; border-radius: 10px; }
+  .container { padding-left: calc(0.75rem + var(--safe-pad-left)); padding-right: calc(0.75rem + var(--safe-pad-right)); }
+}
+
+/* Buttons & CTAs: ensure touch targets and prevent overflow text */
+.btn, .btn-lg, .btn-primary, .btn-ghost {
+  min-height: 44px;
+  min-width: 0;
+  padding-left: 12px;
+  padding-right: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* If nav has too many items, collapse visually by wrapping the CTAs below */
+@media (max-width: 640px) {
+  .main-nav { order: 3; width: 100%; justify-content: flex-start; padding-top: 8px; }
+  .header-cta { order: 2; width: auto; gap: 8px; }
+  .brand { order: 1; }
+  .topbar { align-items: flex-start; padding-top: 10px; padding-bottom: 10px; }
+}
+
+/* Prevent any element from accidentally using viewport width units that include scrollbars */
+:where(.hero-wrap, .topbar, .container, .card, .footer, .hero-art) {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Text wrapping safety for long strings */
+p, h1, h2, h3, li, span, button, a, input {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Hide horizontal scrollbar on small viewports when slight overflow exists (visual smoothing) */
+@media (max-width: 420px) {
+  body { -webkit-overflow-scrolling: touch; }
+  html::-webkit-scrollbar { height: 0.25rem; }
+}
+
+/* Reduce motion for users who prefer less animation */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+/* CSS: Montserrat base (reemplazar la sección de reset/base o añadir después) */
+body{
+  font-family: "Montserrat", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial;
+  font-weight: 400;
+  font-size: 16px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  -webkit-text-size-adjust:100%;
+}
+
+/* Logo responsive */
+.brand {
+  display:flex;
+  gap:0.75rem;
+  align-items:center;
+  min-width:0;
+}
+.brand .logo { flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+.brand .logo img { width:60px; height:auto; display:block; object-fit:contain; }
+
+/* Ajustes tipográficos puntuales */
+h1, .brand-title { font-weight:700; letter-spacing: -0.01em; }
+.hero-title { font-weight:700; }
+
+/* Asegurar que .btn y .hero-buttons no provoquen overflow */
+.hero-buttons{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.btn { white-space:nowrap; min-height:44px; }
+
+/* Mobile-safe additions (PEGA AL FINAL del CSS) */
+html, body {
+  max-width:100%;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+}
+:root {
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+}
+.container { padding-left: calc(1rem + var(--safe-left)); padding-right: calc(1rem + var(--safe-right)); }
+
+/* Forzar que hijos flex/grid no forcen ancho */
+*,
+*::before,
+*::after { box-sizing:border-box; min-width:0; }
+
+/* Fluid typography */
+.hero-title { font-size: clamp(1.25rem, 5.2vw, 2.75rem); line-height:1.03; }
+.brand-title { font-size: clamp(0.95rem, 2.4vw, 1.05rem); }
+
+/* Responsive header behavior */
+.topbar { gap:12px; padding-left: calc(12px + var(--safe-left)); padding-right: calc(12px + var(--safe-right)); flex-wrap:wrap; align-items:center; }
+.main-nav { display:flex; gap:8px; flex-wrap:wrap; }
+.header-cta { display:flex; gap:8px; }
+
+/* Hero single column under 920px */
+@media (max-width: 920px) {
+  .hero-wrap { grid-template-columns: 1fr; gap:14px; padding-top:10px; }
+  .hero-art { min-height:160px; border-radius:12px; }
+}
+
+/* Small phones */
+@media (max-width: 380px) {
+  .brand .logo img { width:46px; }
+  .hero-title { font-size: 1.15rem; }
+  .btn-lg { padding: 10px 12px; font-size: .95rem; }
+}
+
+/* Calendar: keep 7 columns visually but avoid overflow */
+.calendar-grid { grid-template-columns: repeat(7, minmax(0,1fr)); gap:8px; }
+@media (max-width:520px) {
+  .calendar-grid { gap:6px; }
+  .calendar-grid .dow { font-size:.72rem; padding:4px 2px; }
+  .day { min-height:56px; padding:6px; }
+  .day .num { font-size:.95rem; }
+}
+
+/* Hours grid responsive */
+.hours-grid { grid-template-columns: repeat(auto-fit, minmax(96px,1fr)); gap:10px; }
+@media (max-width:420px) {
+  .hours-grid { grid-template-columns: repeat(auto-fit, minmax(84px,1fr)); gap:8px; }
+  .hour { padding:10px 8px; font-size:.95rem; min-height:44px; }
+}
+
+/* Prevent decorative pseudo elements overflow */
+.hero-ink, .topbar--glow::after { max-width:100%; left:0; right:0; pointer-events:none; }
+
+/* Text wrap safety */
+p, h1, h2, h3, li, span, button, a, input { word-break: break-word; overflow-wrap: anywhere; hyphens:auto; }
+
+/* Hide calendar state text but keep number and colored dot */
+/* Keeps only .num visible inside .day */
+.calendar-grid .day > *:not(.num) { display: none !important; }
+/* If badges exist, render as colored dots */
+.calendar-grid .day .badge,
+.calendar-grid .day .status,
+.calendar-grid .day .label {
+  font-size:0 !important; line-height:0 !important; padding:0 !important; min-height:0 !important;
+  display:inline-block !important; width:12px; height:12px; border-radius:999px; margin-top:6px;
+}
+.calendar-grid .day .badge.red { background:var(--bad); }
+.calendar-grid .day .badge.orange { background:var(--warn); }
+.calendar-grid .day .badge.white { background:#fff; border:1px solid rgba(0,0,0,.08); }
+
+/* Legend: hide text keep dots */
+.legend { font-size:0 !important; color:transparent !important; line-height:0 !important; display:flex; gap:8px; align-items:center; }
+.legend .dot { width:10px; height:10px; border-radius:999px; display:inline-block; }
+
+/* Reduced motion prefs */
+@media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } }
+
+/* Fallback when env() unsupported */
+@supports not (padding-left: env(safe-area-inset-left)) { .container { padding-left:1rem; padding-right:1rem; } .topbar { padding-left:12px; padding-right:12px; } }
