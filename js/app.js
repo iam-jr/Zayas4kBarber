@@ -552,3 +552,36 @@ document.addEventListener("click", (ev) => {
   ev.preventDefault();
   resetAll();
 });
+
+const slides = document.querySelectorAll('.slide');
+let current = 0;
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+  });
+}
+
+// Cambia cada 2 segundos
+setInterval(() => {
+  current = (current + 1) % slides.length;
+  showSlide(current);
+}, 2000);
+
+// Swipe simple para móviles
+let startX = 0;
+
+document.querySelector('.hero-art').addEventListener('touchstart', e => {
+  startX = e.touches[0].clientX;
+});
+
+document.querySelector('.hero-art').addEventListener('touchend', e => {
+  let endX = e.changedTouches[0].clientX;
+  if (endX - startX > 50) { // swipe right
+    current = (current - 1 + slides.length) % slides.length;
+    showSlide(current);
+  } else if (startX - endX > 50) { // swipe left
+    current = (current + 1) % slides.length;
+    showSlide(current);
+  }
+});
