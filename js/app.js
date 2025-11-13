@@ -554,34 +554,40 @@ document.addEventListener("click", (ev) => {
 });
 
 const slides = document.querySelectorAll('.slide');
+const slider = document.querySelector('.slider');
 let current = 0;
+const total = slides.length;
 
 function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.toggle('active', i === index);
-  });
+  slider.style.transform = `translateX(-${index * 100}%)`;
 }
 
-// Cambia cada 2 segundos
-setInterval(() => {
-  current = (current + 1) % slides.length;
+// Autoplay cada 2 segundos
+let autoplay = setInterval(() => {
+  current = (current + 1) % total;
   showSlide(current);
 }, 2000);
 
-// Swipe simple para móviles
+// Swipe táctil para móviles
 let startX = 0;
 
-document.querySelector('.hero-art').addEventListener('touchstart', e => {
+const hero = document.querySelector('.hero-art');
+
+hero.addEventListener('touchstart', e => {
   startX = e.touches[0].clientX;
+  clearInterval(autoplay); // Pausa autoplay al tocar
 });
 
-document.querySelector('.hero-art').addEventListener('touchend', e => {
+hero.addEventListener('touchend', e => {
   let endX = e.changedTouches[0].clientX;
   if (endX - startX > 50) { // swipe right
-    current = (current - 1 + slides.length) % slides.length;
-    showSlide(current);
+    current = (current - 1 + total) % total;
   } else if (startX - endX > 50) { // swipe left
-    current = (current + 1) % slides.length;
-    showSlide(current);
+    current = (current + 1) % total;
   }
+  showSlide(current);
+  autoplay = setInterval(() => { // reinicia autoplay
+    current = (current + 1) % total;
+    showSlide(current);
+  }, 2000);
 });
