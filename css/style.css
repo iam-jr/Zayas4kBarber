@@ -49,6 +49,140 @@ a{color:inherit;text-decoration:none}
   display: block;
 }
 
+/* ============================================ */
+/* Diseño y estilo para la sección de instrucciones */
+/* ============================================ */
+
+.intro-message {
+  background: var(--card);
+  padding: 32px 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.intro-message h2 {
+  font-size: 2rem;
+  color: var(--violet-100);
+  margin-bottom: 16px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.intro-message p {
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 24px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.intro-message .steps-list {
+  list-style-type: none;   /* Elimina los números y puntos predeterminados */
+  padding-left: 0;         /* Elimina el margen a la izquierda */
+  margin: 0;
+  counter-reset: step-counter;  /* Inicia el contador para los pasos */
+}
+
+.intro-message .steps-list li {
+  position: relative;
+  padding-left: 30px;  /* Da espacio suficiente para el número personalizado */
+  margin-bottom: 16px;  /* Espaciado entre los elementos */
+  font-size: 1rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.intro-message .steps-list li::before {
+  content: counter(step-counter) ". "; /* Agrega un número seguido de un punto */
+  counter-increment: step-counter; /* Incrementa el contador automáticamente */
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--violet-400);  /* Puedes cambiar este color a tu gusto */
+}
+
+.intro-message .steps-list li span {
+  font-weight: 600;
+}
+
+.intro-message .steps-list li:last-child {
+  margin-bottom: 0; /* Elimina el margen de abajo del último item */
+}
+
+.intro-message .steps-list li::before {
+  color: var(--violet-600); /* Color para los números (puedes modificarlo) */
+}
+
+/* Animación de entrada suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-message {
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Estilos adicionales de la lista */
+.intro-message .steps-list li:hover {
+  background: rgba(168,85,247,.1);  /* Sombra ligera al pasar el ratón */
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.intro-message .steps-list li span {
+  color: var(--violet-500);
+}
+
+/* Estilos de los íconos si los llegas a usar */
+.intro-message .steps-list li .icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background-color: var(--violet-500);
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* ============================================ */
+/* Personalización de los colores de la lista */
+/* ============================================ */
+:root {
+  --violet-50: #F5F3FF;
+  --violet-100: #EDE9FE;
+  --violet-200: #DDD6FE;
+  --violet-300: #C4B5FD;
+  --violet-400: #A78BFA;
+  --violet-500: #8B5CF6;
+  --violet-600: #7C3AED;
+  --violet-700: #6D28D9;
+  --violet-800: #5B21B6;
+  --violet-900: #4C1D95;
+  
+  --bg: #0b0b12;
+  --card: #11111a;
+  --muted: #a9acc6;
+  --text: #f5f6ff;
+  --ok: #22c55e;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+  --radius: 16px;
+}
+
 .brand-title{margin:0;font-size:18px}
 .brand-sub{margin:0;color:var(--muted);font-size:12px}
 
@@ -348,6 +482,30 @@ a{color:inherit;text-decoration:none}
   font-size: 0.98rem;
   color: var(--text);
 }
+
+/* Select de servicios */
+#serviceId {
+  background-color: var(--bg-color, #1b0e2b); /* Fondo igual que la web */
+  color: #ffffff;                              /* Texto blanco */
+  border: 1px solid #4b2a7a;                  /* Borde suave para diferenciar */
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+/* Opciones desplegables */
+#serviceId option {
+  background-color: var(--bg-color, #1b0e2b); /* Fondo igual que la web */
+  color: #ffffff;                              /* Texto blanco */
+}
+
+/* Hover sobre opción seleccionada */
+#serviceId option:hover {
+  background-color: #3b1f5b; /* Ligero contraste al pasar el mouse */
+  color: #ffffff;
+}
+
 
 /* icono / badge */
 .service-list li > span{
@@ -900,3 +1058,169 @@ p, h1, h2, h3, li, span, button, a, input { word-break: break-word; overflow-wra
   pointer-events: none;
   border-radius: inherit;
 }
+
+.confirmation-container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: var(--bg-color); /* mismo color que tu web */
+  color: var(--text-color); /* letra visible */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.confirmation-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--primary-color); /* violeta de la web */
+}
+
+.confirmation-container p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.confirmation-container .btn {
+  margin: 10px 5px;
+}
+
+/* Botón de Apple Calendar */
+#add-apple {
+  background-color: #007aff;  /* Color azul característico de Apple */
+  color: white;
+  border: none;
+}
+
+#add-apple:hover {
+  background-color: #005a8b;  /* Azul más oscuro para el hover */
+}
+
+/* Contenedor de los botones */
+.calendar-buttons {
+  display: flex;
+  flex-direction: column;  /* Coloca los botones en una columna */
+  gap: 10px;  /* Espacio entre los botones */
+  margin-top: 20px;
+  align-items: center;  /* Centra los botones horizontalmente */
+}
+
+/* Estilo general para los botones */
+.btn {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Animación suave en los botones */
+  width: auto; /* Hace que los botones se ajusten al tamaño del contenido */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para los botones "ghost" */
+.btn-ghost {
+  background-color: transparent;
+  color: #7C3AED;
+  border: 2px solid #7C3AED;
+}
+
+.btn-ghost:hover {
+  background-color: #7C3AED;
+  color: white;
+}
+
+/* Estilo para el botón "primary" */
+.btn-primary {
+  background-color: #7C3AED;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #5B2F92;
+  transform: translateY(-2px); /* Ligera animación para "elevar" el botón */
+}
+
+/* Botón de Google Calendar */
+#add-google {
+  background-color: #34b7f1;  /* Color típico de Google */
+  color: white;
+  border: none;
+}
+
+#add-google:hover {
+  background-color: #008CFF;
+}
+
+/* Añadir un espaciado entre los botones si es necesario */
+.calendar-buttons a,
+.calendar-buttons button {
+  width: 100%;
+  max-width: 300px;  /* Para que no crezcan demasiado en pantallas grandes */
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+
+footer {
+  margin-top: 50px;
+  padding: 20px 0;
+  text-align: center;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  font-size: 0.9rem;
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+/* Contenedor general del mapa */
+.map-container, iframe {
+  max-width: 100%;      /* Para que no se salga del contenedor en móviles */
+  width: 300px;         /* Ancho inicial */
+  height: 200px;        /* Alto inicial */
+  border: 0;            /* Sin borde */
+  border-radius: 8px;   /* Bordes redondeados opcional */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* Sombra ligera */
+  display: block;
+  margin: 10px auto;    /* Centrado horizontal */
+}
+
+/* Hacer el iframe responsive */
+iframe {
+  width: 100%;
+  height: 200px;
+}
+
+/* Estilo del enlace de Google Maps */
+a[href*="google.com/maps"] {
+  display: inline-block;
+  margin: 5px auto 10px auto;
+  padding: 8px 12px;
+  background-color: #4285F4; /* Azul Google */
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  transition: background 0.3s;
+}
+
+a[href*="google.com/maps"]:hover {
+  background-color: #3367D6;
+}
+
+/* Media query para móviles muy pequeños */
+@media (max-width: 360px) {
+  iframe {
+    height: 180px;
+  }
+}
+
