@@ -6,45 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#7C3AED" />
   <meta name="description" content="Barbería Los Magicos en Carolina, PR. Saca tu cita rápido con Zayas4k: cortes precisos, barba definida y mas.">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Meta viewport con ligera escala de zoom-out -->
 <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="css/style.css">
 
 
   <!-- (Opcional PWA, si ya lo usas) -->
-  <link rel="manifest" href="js/manifest.json">
+  <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icons/icon-192.png" sizes="192x192">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- HEAD: Reemplaza TODOS tus meta viewport existentes con ESTE BLOQUE (ponerlo lo más arriba posible en <head>) -->
 <meta name="viewport" id="meta-viewport" content="width=device-width, initial-scale=0.92, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
 <script>
-  // Ajusta dinámicamente initial-scale para "zoom out" fino según dispositivo (colocar en <head> justo después del meta)
   (function(){
     try {
-      const meta = document.getElementById('meta-viewport') || document.querySelector('meta[name="viewport"]');
-      if (!meta) return;
+      const meta = document.getElementById('meta-viewport');
       const dpr = window.devicePixelRatio || 1;
       const vw = Math.min(window.innerWidth || screen.width, screen.width);
-      // valores probados: Pro Max suele tener DPR alto -> bajar más el scale
       let scale = 0.92;
-      if (dpr >= 3) scale = 0.88;      // pantallas muy densas (Pro Max, S-series Ultra)
-      else if (dpr >= 2) scale = 0.90; // pantallas densas (most Android high-end)
-      else if (vw <= 360) scale = 0.98; // teléfonos muy angostos -> casi sin zoom
-      // aplicamos
+      if (dpr >= 3) scale = 0.88;
+      else if (dpr >= 2) scale = 0.90;
+      else if (vw <= 360) scale = 0.98;
       meta.setAttribute('content', `width=device-width, initial-scale=${scale}, maximum-scale=1.0, user-scalable=0, viewport-fit=cover`);
-    } catch (e) { /* fail silently */ }
+    } catch(e){}
   })();
 </script>
 
-
-  <!-- SEO JSON-LD -->
+ <!-- SEO JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -108,7 +99,7 @@
   </a>
 
   <!-- WhatsApp Button -->
-  <a id="cta-whatsapp" class="btn btn-ghost btn-lg" href="https://wa.me/19393976152" target="_blank" aria-label="WhatsApp">
+<a id="cta-whatsapp" class="btn btn-ghost btn-lg" href="https://wa.me/17873976152" target="_blank" aria-label="WhatsApp">
     <!-- SVG WhatsApp Icon -->
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24" style="margin-right: 8px; vertical-align: middle;">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.1-.472-.149-.672.15-.198.297-.767.966-.94 1.164-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.074-.149-.672-1.612-.92-2.206-.242-.579-.487-.5-.672-.51l-.573-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.077 4.487.709.306 1.262.489 1.693.625.712.227 1.36.195 1.872.118.571-.085 1.758-.718 2.006-1.41.248-.694.248-1.29.173-1.41-.074-.12-.273-.198-.57-.347z"/>
@@ -135,8 +126,19 @@
 </div>
 
   </section>
+  <section>
+<article class="intro-message">
+  <h2>¿Cómo reservar tu cita Online?</h2>
+  <p>¡Es muy fácil! Solo sigue estos simples pasos:</p>
+  <ol>
+    <li>Selecciona el <strong>día</strong> que mejor te convenga.</li>
+    <li>Escoge la <strong>hora</strong> disponible que más te guste.</li>
+    <li>Completa tu <strong>información personal</strong> para confirmar tu cita.</li>
+    <li>Haz clic en el botón <strong>"Reservar"</strong> para finalizar tu reserva.</li> <!-- Este es el paso adicional -->
+    <li>¡Listo! Recibirás un <strong>email de confirmación</strong> y podrás agregar la cita a tu calendario.</li>
+  </ol>
+</article>
 
-  <!-- Booking -->
   <main id="booking" class="container" role="main">
     <section class="flow" aria-live="polite">
       <ol class="steps" aria-label="Progreso de reserva">
@@ -158,9 +160,9 @@
         </header>
         <div id="calendar" class="calendar-grid" role="grid" aria-label="Calendario de disponibilidad"></div>
         <div class="legend">
-          <span class="dot dot-red"></span> Lleno
-          <span class="dot dot-orange"></span> Intermedio
-          <span class="dot dot-white"></span> Disponible <span aria-hidden="true">✅</span>
+<span class="dot dot-red"></span> Lleno
+<span class="dot dot-white"></span> Disponible <span aria-hidden="true">✅</span>
+
         </div>
       </article>
 
@@ -195,16 +197,18 @@
             <span>Teléfono</span>
             <input id="clientPhone" name="tel" inputmode="tel" placeholder="+1 787 555 5555" autocomplete="tel" />
           </label>
-          <label class="full">
-            <span>Servicio</span>
-            <select id="serviceId" required>
-              <option value="" disabled selected>Selecciona un servicio</option>
-              <option value="Corte" data-duration="40" data-price="30">Corte — 40 min — $30</option>
-              <option value="Barba" data-duration="55" data-price="40">Corte Y Barba — 55 min — $40</option>
-              <option value="Combo" data-duration="60" data-price="50">Corte Y Barba con Hot Towel — $50</option>
-              <option value="Combo" data-duration="60" data-price="50">House Call — 60 min — $100</option>
-            </select>
-          </label>
+        <label class="custom-select-label">
+          
+  <span>Servicio</span>
+  <select id="serviceId" required>
+    <option value="" disabled selected>Selecciona un servicio</option>
+    <option value="Corte" data-duration="40" data-price="30">Corte — 40 min — $40</option>
+    <option value="Barba" data-duration="55" data-price="40">Corte y Barba — 55 min — $40</option>
+    <option value="Combo" data-duration="60" data-price="50">Corte y Barba con Hot Towel — $50</option>
+    <option value="HouseCall" data-duration="60" data-price="100">House Call — 60 min — $100</option>
+  </select>
+</label>
+
           <div class="two-col">
             <label>
               <span>Duración</span>
@@ -215,66 +219,84 @@
               <input id="servicePrice" readonly placeholder="—" />
             </label>
           </div>
-          <label class="check">
-            <input type="checkbox" id="optIn" />
-            <span>Acepto recibir confirmacion y promos via WhatsApp/SMS</span>
-          </label>
+<label class="check">
+  <input type="checkbox" id="optIn" />
+  <span>Acepto recibir confirmación y promociones vía email.</span>
+</label>
+
         </form>
       </article>
+<!-- Step 4: Confirmar -->
+<article class="card" aria-labelledby="step4-title">
+  <header class="card-head"><h3 id="step4-title">Confirmar</h3></header>
+  <div class="summary" id="summary" aria-live="polite">
+    Selecciona día, hora y servicio para ver el resumen.
+  </div>
+  <div class="actions">
+    <button id="reserve-btn" class="btn btn-primary" disabled>Reservar</button>
+  </div>
 
-      <!-- Step 4: Confirmar -->
-      <article class="card" aria-labelledby="step4-title">
-        <header class="card-head"><h3 id="step4-title">Confirmar</h3></header>
-        <div class="summary" id="summary" aria-live="polite">Selecciona día, hora y servicio para ver el resumen.</div>
-        <div class="actions">
-          <button id="reserve-btn" class="btn btn-primary" disabled>Reservar</button>
-          <button id="add-ics" class="btn btn-ghost" disabled>Añadir a mi calendario</button>
-          <a id="add-google" class="btn btn-ghost disabled" href="#" target="_blank" rel="noopener">Google Calendar</a>
-          <!-- Botón Reiniciar eliminado de aquí para evitar duplicar ID -->
-        </div>
-        <p id="msg" class="status" role="status" aria-live="polite"></p>
-      </article>
+  <!-- Opción de añadir a calendario después de reservar -->
+  <div class="calendar-options">
+    <p class="calendar-note">Luego de reservar, añade tu cita al calendario en tu Smart Phone.</p>
+    <button id="add-ics" class="btn btn-ghost" disabled>Añadir a mi calendario</button>
+    <a id="add-google" class="btn btn-ghost disabled" href="#" target="_blank" rel="noopener">Google Calendar</a>
+  </div>
+
+  <p id="msg" class="status" role="status" aria-live="polite"></p>
+</article>
+
+<script>
+// Simulando la habilitación del botón "Reservar" cuando se seleccionan día, hora y servicio
+document.getElementById('reserve-btn').disabled = false; // Aquí lo habilitamos manualmente
+
+// Evento de clic para redirigir a confirmation.html
+document.getElementById('reserve-btn').addEventListener('click', function() {
+    // Aquí puedes añadir validaciones si es necesario (por ejemplo, si el usuario seleccionó un día, hora y servicio)
+    window.location.href = 'confirmation.html'; // Redirige a confirmation.html
+});
+</script>
+
+
     </section>
   </main>
 
   <!-- Servicios -->
   <section id="servicios" class="container services">
-    <h3 class="section-title">Servicios destacados</h3>
+    <h3 class="section-title">Servicios</h3>
     <ul class="service-list">
       <li><span>✂</span> Corte clásico / skin fade — 45 min</li>
       <li><span>🧔</span> Arreglo de corte y barba con hot towel — 55 min</li>
-      <li><span>💈</span> Combo corte + barba — 60 min</li>
-      <li><span>🏠</span> House Call— 60 min</li>
+      <li><span>💈</span> Combo completo corte + barba — 60 min</li>
+      <li><span>🏠</span> House Call — 60 min</li>
     </ul>
   </section>
 
   <!-- Footer -->
   <footer class="footer container" id="contacto" role="contentinfo">
     <div class="footer-grid">
-      <div>
-        <strong class="footer-title">Zayas4k Barber</strong><br>
-        Carolina, Puerto Rico<br>
-        <a class="footer-link" href="tel:+17870000000">+1 (939) 397-6152</a><br>
-        <a id="whats-link" class="footer-link" href="#" target="_blank" rel="noopener">WhatsApp directo</a>
-      </div>
+<div>
+  <strong class="footer-title">Zayas4k Barber</strong><br>
+  Carolina, Puerto Rico<br>
+  <a class="footer-link" href="tel:+17873976152">+1 (939) 397-6152</a><br>
+  <a id="whats-link" class="footer-link" href="https://wa.me/17873976152" target="_blank" rel="noopener">WhatsApp directo</a>
+</div>
+
       <div>
         <strong class="footer-title">Horario</strong>
         <ul class="hours">
-          <li>Mar–Sáb: 10:00–7:00</li>
+          <li>Mar–Sáb: 10:00am–7:00pm</li>
           <li>Dom–Lun: Cerrado</li>
         </ul>
-<!-- Mapa incrustado pequeño (funciona en Android y iPhone) -->
 <a href="https://www.google.com/maps?q=18.401229,-65.978002" target="_blank" rel="noopener">
   📍 Abrir en Google Maps
 </a>
 <iframe
   src="https://www.google.com/maps?q=18.401229,-65.978002&hl=es&z=15&output=embed"
-  width="300"       <!-- ancho del mapa -->
-  height="200"      <!-- alto del mapa -->
-  style="border:0;"
   allowfullscreen
   loading="lazy">
 </iframe>
+
 
 <!-- Link para abrir en Google Maps si quieren verlo completo -->
 
@@ -283,8 +305,8 @@
         <strong class="footer-title">Confianza</strong>
         <ul class="trust">
           <li>⭐ 5 / Clientes satisfechos</li>
-          <li>🔒 Pagos seguros</li>
-          <li>🗓️ Recordatorios por email/SMS</li>
+          <li>🔒 Citas seguras</li>
+          <li>🗓️ Recordatorios via email</li>
         </ul>
       </div>
     </div>
