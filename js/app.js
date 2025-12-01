@@ -401,56 +401,7 @@ function enableReserveIfReady() {
   $("#add-google")?.classList.toggle("disabled", !ready);
 }
 
-// Reserva (enviar al servidor)
-$("#reserve-btn")?.addEventListener("click", () => {
-  if (!selectedDate || !selectedTime || !selectedService) return;
 
-  const clientName = $("#clientName")?.value?.trim();
-  const clientEmail = $("#clientEmail")?.value?.trim();
-  const clientPhone = $("#clientPhone")?.value?.trim();
-
-  // Asegúrate de que el cliente tenga todos los datos requeridos
-  if (!clientName || !clientEmail) {
-    toast("Por favor, ingrese todos los datos del cliente.");
-    return;
-  }
-
-  const bookingData = {
-    name: clientName,
-    email: clientEmail,
-    phone: clientPhone,
-    service: selectedService.name,
-    date: selectedDate.toISOString().split('T')[0], // solo la fecha (sin hora)
-    time: selectedTime
-  };
-
-  // Enviar la reserva al backend
-  fetch("http://localhost:3000/api/reservas", {  // Aquí ajustas la URL de tu servidor
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify(bookingData)
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      toast("Reserva guardada exitosamente.");
-      enviarCorreos();
-      renderHours();  // Actualiza las horas disponibles
-      renderCalendar(viewYear, viewMonth);  // Re-renderiza el calendario
-      stepTo(4);  // Paso 4: Confirmación
-      updateSummary();
-      enableReserveIfReady();
-    } else {
-      toast("Error al guardar la reserva. Intenta de nuevo.");
-    }
-  })
-  .catch(error => {
-    console.error("Error al hacer la reserva:", error);
-    toast("Error al hacer la reserva. Por favor, intenta de nuevo.");
-  });
-});
 
 
 /* ===================== ICS y Google Calendar ===================== */
@@ -536,53 +487,59 @@ $("#next-month")?.addEventListener("click", () => {
 });
 /* ===================== EmailJS ===================== */
 
-// Inicializar EmailJS correctamente
-emailjs.init("gDEXHVuu4ITzRiej6");
+// Inicializar EmailJS
+emailjs.init("gDEXHVuu4ITzRiej6"); // Tu Public Key
 
-/**
- * Enviar correos (cliente + barbero) SOLO después de guardar reserva.
- */
-function enviarCorreos() {
+// Botón de reserva
+$("#reserve-btn")?.addEventListener("click", () => {
+  if (!selectedDate || !selectedTime || !selectedService) return;
+
+  const clientName = $("#clientName")?.value?.trim();
+  const clientEmail = $("#clientEmail")?.value?.trim();
+  const clientPhone = $("#clientPhone")?.value?.trim();
+
+  if (!clientName || !clientEmail) {
+    toast("Por favor, ingresa todos los datos requeridos.");
+    return;
+  }
+
   const datosCliente = {
-    name: $("#clientName").value.trim(),
-    clientEmail: $("#clientEmail").value.trim(),
-    clientPhone: $("#clientPhone").value.trim(),
+    name: clientName,
+    email: clientEmail,
+    phone: clientPhone,
     service: selectedService.name,
     duration: selectedService.duration,
     price: `$${selectedService.price.toFixed(2)}`,
-    date: selectedDate.toISOString().split("T")[0],
-    time: selectedTime
+    date: selectedDate.toLocaleDateString("es-PR"),
+    time: to12h(selectedTime)
   };
 
-  // --- Enviar al CLIENTE ---
-  emailjs
-    .send("service_4v8u0jp", "template_9p3kvki", {
-      name: datosCliente.name,
-      service: datosCliente.service,
-      duration: datosCliente.duration,
-      price: datosCliente.price,
-      date: datosCliente.date,
-      time: datosCliente.time,
-      clientPhone: datosCliente.clientPhone
-    })
-    .then(() => console.log("✔ Email enviado al cliente"))
-    .catch((err) => console.error("❌ Error cliente:", err));
+  const datosBarbero = {
+    clientName: clientName,
+    clientEmail: clientEmail,
+    clientPhone: clientPhone,
+    service: selectedService.name,
+    duration: selectedService.duration,
+    price: `$${selectedService.price.toFixed(2)}`,
+    date: selectedDate.toLocaleDateString("es-PR"),
+    time: to12h(selectedTime)
+  };
 
-  // --- Enviar al BARBERO ---
-  emailjs
-    .send("service_4v8u0jp", "template_thz7as6", {
-      clientName: datosCliente.name,
-      clientEmail: datosCliente.clientEmail,
-      clientPhone: datosCliente.clientPhone,
-      service: datosCliente.service,
-      duration: datosCliente.duration,
-      price: datosCliente.price,
-      date: datosCliente.date,
-      time: datosCliente.time
-    })
-    .then(() => console.log("✔ Email enviado al barbero"))
-    .catch((err) => console.error("❌ Error barbero:", err));
-}
+  // Enviar ambos emails (Cliente + Barbero)
+  Promise.all([
+    emailjs.send("service_4v8u0jp", "template_9p3kvki", datosCliente),    // Cliente
+    emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)     // Barbero
+  ])
+  .then(() => {
+    toast("¡Cita confirmada! Redirigiendo...");
+    setTimeout(() => window.location.href = "confirmation.html", 1200);
+  })
+  .catch((err) => {
+    console.error("Error al enviar correos:", err);
+    toast("Hubo un problema al enviar la cita. Intenta nuevamente.");
+  });
+});
+
 
 /* ===================== Inicio ===================== */
 (function init() {
