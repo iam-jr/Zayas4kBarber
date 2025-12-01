@@ -503,28 +503,32 @@ document.getElementById("reserve-btn")?.addEventListener("click", () => {
     alert("Por favor, ingresa todos los datos requeridos.");
     return;
   }
+const datosCliente = {
+  name: clientName,
+  email: clientEmail,
+  phone: clientPhone,
+  service: selectedService.name,
+  duration: selectedService.duration,
+  price: `$${selectedService.price.toFixed(2)}`,
+  date: selectedDate.toLocaleDateString("es-PR"),
+  time: to12h(selectedTime)
+};
 
-  const datosCliente = {
-    name: clientName,
-    email: clientEmail,
-    phone: clientPhone,
-    service: selectedService.name,
-    duration: selectedService.duration,
-    price: `$${selectedService.price.toFixed(2)}`,
-    date: selectedDate.toLocaleDateString("es-PR"),
-    time: to12h(selectedTime)
-  };
+const datosBarbero = {
+  clientName: clientName,
+  clientEmail: clientEmail,
+  clientPhone: clientPhone,
+  service: selectedService.name,
+  duration: selectedService.duration,
+  price: `$${selectedService.price.toFixed(2)}`,
+  date: selectedDate.toLocaleDateString("es-PR"),
+  time: to12h(selectedTime)
+};
 
-  const datosBarbero = {
-    name: clientName,
-    email: "zayas4ka@outlook.com",  // Email del barbero
-    phone: clientPhone,
-    service: selectedService.name,
-    duration: selectedService.duration,
-    price: `$${selectedService.price.toFixed(2)}`,
-    date: selectedDate.toLocaleDateString("es-PR"),
-    time: to12h(selectedTime)
-  };
+Promise.all([
+  emailjs.send("service_4v8u0jp", "template_9p3kvki", datosCliente),
+  emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)
+])
 
   // Enviar ambos emails (Cliente + Barbero)
   Promise.all([
