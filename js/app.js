@@ -489,7 +489,7 @@ $("#next-month")?.addEventListener("click", () => {
 
 
 // Inicializar EmailJS
-emailjs.init("gDEXHVuu4ITzRiej6"); // Tu Public Key
+emailjs.init("BDoPiAVp4t0eUcheb"); // Tu Public Key
 
 // Botón de reserva
 document.getElementById("reserve-btn")?.addEventListener("click", () => {
