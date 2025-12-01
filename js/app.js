@@ -44,37 +44,6 @@ function to12h(hhmm){
   return `${h12}:${String(M).padStart(2,"0")} ${suffix}`;
 }
 
-/* Toast minimal */
-function toast(msg) {
-  const t = $("#toast");
-  if (!t) return alert(msg);
-  t.textContent = msg;
-  t.classList.add("show");
-  window.clearTimeout(t._timer);
-  t._timer = window.setTimeout(() => t.classList.remove("show"), 1800);
-}
-
-/* ===================== Semilla DEMO (no datos personales) ===================== */
-(function seedDemo() {
-  if (!DEMO_SEED) return;
-  if (localStorage.getItem(STORAGE_KEY)) return;
-
-  const data = {};
-  const today = new Date();
-  for (let i = 0; i < 10; i++) {
-    const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
-    const key = dateKey(d);
-    data[key] = data[key] || [];
-
-    // 0–8 slots ocupados al azar para simular demanda
-    const busyCount = Math.floor(Math.random() * 8);
-    const daySlots = generateDaySlots(d, 45); // densidad base
-    for (let j = 0; j < busyCount && j < daySlots.length; j++) {
-      data[key].push(daySlots[j]);
-    }
-  }
-  saveBookings(data);
-})();
 
 /* ===================== Calendario ===================== */
 function renderCalendar(y, m) {
@@ -525,11 +494,14 @@ const datosBarbero = {
   time: to12h(selectedTime)
 };
 
-Promise.all([
-  emailjs.send("service_4v8u0jp", "template_9p3kvki", datosCliente),
-  emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)
-])
 
+console.log(datosCliente, datosBarbero);
+
+  // Enviar ambos emails (Cliente + Barbero)
+  Promise.all([
+    emailjs.send("service_4v8u0jp", "template_9p3kvki", datosCliente),
+    emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)
+  ])
   .then(() => {
     alert("¡Cita confirmada! Redirigiendo...");
     window.location.href = "confirmation.html";
@@ -577,33 +549,3 @@ function resetAll() {
   renderHours();
   renderCalendar(viewYear, viewMonth);
 }
-
-// Autoplay cada 2 segundos
-let autoplay = setInterval(() => {
-  current = (current + 1) % total;
-  showSlide(current);
-}, 2000);
-
-// Swipe táctil para móviles
-let startX = 0;
-
-const hero = document.querySelector('.hero-art');
-
-hero.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-  clearInterval(autoplay); // Pausa autoplay al tocar
-});
-
-hero.addEventListener('touchend', e => {
-  let endX = e.changedTouches[0].clientX;
-  if (endX - startX > 50) { // swipe right
-    current = (current - 1 + total) % total;
-  } else if (startX - endX > 50) { // swipe left
-    current = (current + 1) % total;
-  }
-  showSlide(current);
-  autoplay = setInterval(() => { // reinicia autoplay
-    current = (current + 1) % total;
-    showSlide(current);
-  }, 2000);
-});
