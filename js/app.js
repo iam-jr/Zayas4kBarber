@@ -535,9 +535,10 @@ $("#reserve-btn")?.addEventListener("click", () => {
     setTimeout(() => window.location.href = "confirmation.html", 1200);
   })
   .catch((err) => {
-    console.error("Error al enviar correos:", err);
-    toast("Hubo un problema al enviar la cita. Intenta nuevamente.");
-  });
+  console.error("❌ Error al enviar correos:", err);
+  alert(JSON.stringify(err)); // Muestra detalles del error
+});
+
 });
 
 
