@@ -530,11 +530,6 @@ Promise.all([
   emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)
 ])
 
-  // Enviar ambos emails (Cliente + Barbero)
-  Promise.all([
-    emailjs.send("service_4v8u0jp", "template_9p3kvki", datosCliente),
-    emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)
-  ])
   .then(() => {
     alert("¡Cita confirmada! Redirigiendo...");
     window.location.href = "confirmation.html";
