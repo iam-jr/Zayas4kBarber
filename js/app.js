@@ -401,29 +401,56 @@ function enableReserveIfReady() {
   $("#add-google")?.classList.toggle("disabled", !ready);
 }
 
-/* ===================== Reserva (DEMO local) ===================== */
+// Reserva (enviar al servidor)
 $("#reserve-btn")?.addEventListener("click", () => {
   if (!selectedDate || !selectedTime || !selectedService) return;
 
-  const data = loadBookings();  // SOLO slots ocupados de DEMO
-  const key = dateKey(selectedDate);
-  data[key] = data[key] || [];
+  const clientName = $("#clientName")?.value?.trim();
+  const clientEmail = $("#clientEmail")?.value?.trim();
+  const clientPhone = $("#clientPhone")?.value?.trim();
 
-  if (!data[key].includes(selectedTime)) {
-    data[key].push(selectedTime);
-    saveBookings(data);
-    toast("Reserva guardada (DEMO).");
-    renderHours();
-    renderCalendar(viewYear, viewMonth);
-    stepTo(4);
-    updateSummary();
-    enableReserveIfReady();
-  } else {
-    toast("Esa hora se llenó mientras reservabas. Elige otra.");
-    renderHours();
-    renderCalendar(viewYear, viewMonth);
+  // Asegúrate de que el cliente tenga todos los datos requeridos
+  if (!clientName || !clientEmail) {
+    toast("Por favor, ingrese todos los datos del cliente.");
+    return;
   }
+
+  const bookingData = {
+    name: clientName,
+    email: clientEmail,
+    phone: clientPhone,
+    service: selectedService.name,
+    date: selectedDate.toISOString().split('T')[0], // solo la fecha (sin hora)
+    time: selectedTime
+  };
+
+  // Enviar la reserva al backend
+  fetch("http://localhost:3000/api/reservas", {  // Aquí ajustas la URL de tu servidor
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(bookingData)
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      toast("Reserva guardada exitosamente.");
+      renderHours();  // Actualiza las horas disponibles
+      renderCalendar(viewYear, viewMonth);  // Re-renderiza el calendario
+      stepTo(4);  // Paso 4: Confirmación
+      updateSummary();
+      enableReserveIfReady();
+    } else {
+      toast("Error al guardar la reserva. Intenta de nuevo.");
+    }
+  })
+  .catch(error => {
+    console.error("Error al hacer la reserva:", error);
+    toast("Error al hacer la reserva. Por favor, intenta de nuevo.");
+  });
 });
+
 
 /* ===================== ICS y Google Calendar ===================== */
 $("#add-ics")?.addEventListener("click", () => {
@@ -507,6 +534,52 @@ $("#next-month")?.addEventListener("click", () => {
   if (el) el.addEventListener("click", () => stepTo(1));
 });
 
+// Primero, inicializa EmailJS con tu Public Key
+emailjs.init("gDEXHVuu4ITzRiej6"); // Reemplaza con tu Public Key
+
+// Configurar los parámetros de la plantilla para cliente
+const templateParamsCliente = {
+  name: "Nombre del Cliente",  // Reemplaza con la variable o el valor del cliente
+  email: "cliente@email.com",  // Reemplaza con la dirección de correo del cliente
+  service: "Corte",            // Servicio seleccionado
+  duration: "40",              // Duración del servicio
+  price: "$40",                // Precio del servicio
+  clientPhone: "123-456-7890", // Teléfono del cliente
+  // Agrega más datos si es necesario
+};
+
+// Enviar el correo al cliente
+emailjs.send("service_j89eiti", "template_c6enijc", templateParamsCliente) 
+  .then(function(response) {
+    console.log("Correo enviado exitosamente al cliente", response);
+    alert("¡Cita confirmada! Revisa tu correo para más detalles.");
+  }, function(error) {
+    console.log("Error al enviar correo al cliente", error);
+    alert("Hubo un problema al enviar el correo. Intenta nuevamente.");
+  });
+
+// Configurar los parámetros de la plantilla para el barbero
+const templateParamsBarbero = {
+  clientName: "Nombre del Cliente", // Nombre del cliente
+  clientEmail: "cliente@email.com", // Correo del cliente
+  clientPhone: "123-456-7890",     // Teléfono del cliente
+  service: "Corte",                // Servicio seleccionado
+  duration: "40",                  // Duración del servicio
+  date: "2023-10-30",              // Fecha de la cita
+  time: "10:00 AM",                // Hora de la cita
+  price: "$40",                    // Precio del servicio
+};
+
+// Enviar el correo al barbero
+emailjs.send("service_j89eiti", "template_3c5f70e", templateParamsBarbero)
+  .then(function(response) {
+    console.log("Correo enviado exitosamente al barbero", response);
+  }, function(error) {
+    console.log("Error al enviar correo al barbero", error);
+    alert("Hubo un problema al enviar el correo. Intenta nuevamente.");
+  });
+
+
 /* ===================== Inicio ===================== */
 (function init() {
   const d = new Date(); // no se restaura selección (no persistimos UI)
@@ -514,7 +587,7 @@ $("#next-month")?.addEventListener("click", () => {
   renderHours();
 
   // WhatsApp / Teléfono (no se guardan)
-  const phone = "+17870000000".replace(/\D/g, "");
+  const phone = "+19393976152".replace(/\D/g, "");
   const wa = `https://wa.me/${phone}`;
   ["whats-link", "cta-whatsapp", "cta-whatsapp-fab"].forEach((id) => {
     const a = document.getElementById(id);
