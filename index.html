@@ -2,56 +2,19 @@
 <html lang="es" dir="ltr">
 <head>
   <meta charset="utf-8" />
-  <title>Zayas4k Barber — Saca tu cita</title>
+  <title>Los Mágicos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#7C3AED" />
-  <meta name="description" content="Barbería Los Magicos en Carolina, PR. Saca tu cita rápido con Zayas4k: cortes precisos, barba definida y mas.">
+  <meta name="description" content="Barbería Los Mágicos en Carolina, PR. Saca tu cita rápido con Zayas4k: cortes precisos, barba definida y mas.">
 <!-- Meta viewport con ligera escala de zoom-out -->
-<meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
 
-
-  <!-- (Opcional PWA, si ya lo usas) -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icons/icon-192.png" sizes="192x192">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <!-- HEAD: Reemplaza TODOS tus meta viewport existentes con ESTE BLOQUE (ponerlo lo más arriba posible en <head>) -->
 <meta name="viewport" id="meta-viewport" content="width=device-width, initial-scale=0.92, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
-<script>
-  (function(){
-    try {
-      const meta = document.getElementById('meta-viewport');
-      const dpr = window.devicePixelRatio || 1;
-      const vw = Math.min(window.innerWidth || screen.width, screen.width);
-      let scale = 0.92;
-      if (dpr >= 3) scale = 0.88;
-      else if (dpr >= 2) scale = 0.90;
-      else if (vw <= 360) scale = 0.98;
-      meta.setAttribute('content', `width=device-width, initial-scale=${scale}, maximum-scale=1.0, user-scalable=0, viewport-fit=cover`);
-    } catch(e){}
-  })();
-</script>
 
- <!-- SEO JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Barbershop",
-    "name": "Zayas4k Barber",
-    "address": { "@type": "PostalAddress", "addressLocality": "Carolina", "addressRegion": "PR", "addressCountry": "US" },
-    "telephone": "1 (939) 397-6152",
-    "image": "icons/cover.jpg",
-    "priceRange": "$$",
-    "url": "https://tudominio.com",
-    "openingHoursSpecification": [{
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [ "Tuesday","Wednesday","Thursday","Friday","Saturday" ],
-      "opens": "10:00", "closes": "19:00"
-    }]
-  }
+
   </script>
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
 
@@ -204,7 +167,7 @@
     <option value="" disabled selected>Selecciona un servicio</option>
     <option value="Corte" data-duration="40" data-price="40">Corte — 40 min — $40</option>
     <option value="Barba" data-duration="40" data-price="40">Corte y Barba — 55 min — $40</option>
-    <option value="Combo" data-duration="60" data-price="50">Corte y Barba con Hot Towel — 60 min — $50</option>
+    <option value="Combo" data-duration="60" data-price="50">Corte y Barba con Hot Towel — 60 min $50</option>
     <option value="HouseCall" data-duration="60" data-price="100">House Call — 60 min — $100</option>
   </select>
 </label>
@@ -307,21 +270,8 @@
     </div>
   </footer>
 
-  <!-- Toast -->
-  <div id="toast" class="toast" role="status" aria-live="polite" aria-hidden="true"></div>
 
   <script src="js/app.js" defer></script>
-  <script>
-    // Si usas PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
-      });
-    }
-  </script>
-  <script type="text/javascript">
-  emailjs.init("gDEXHVuu4ITzRiej6");  // Reemplaza con tu public key
-</script>
 
 
 </body>
