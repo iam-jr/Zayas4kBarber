@@ -436,6 +436,7 @@ $("#reserve-btn")?.addEventListener("click", () => {
   .then(data => {
     if (data.success) {
       toast("Reserva guardada exitosamente.");
+      enviarCorreos();
       renderHours();  // Actualiza las horas disponibles
       renderCalendar(viewYear, viewMonth);  // Re-renderiza el calendario
       stepTo(4);  // Paso 4: Confirmación
@@ -501,7 +502,7 @@ function buildEventTimes() {
   const endUTC = new Date(end.getTime() - end.getTimezoneOffset() * 60000);
 
   const title = `Cita ${selectedService.name} — Zayas4k Barber`;
-  const desc = `Servicio: ${selectedService.name} (${selectedService.duration} min) — $${selectedService.price.toFixed(2)}. Ubicación: Ponce, PR.`;
+  const desc = `Servicio: ${selectedService.name} (${selectedService.duration} min) — $${selectedService.price.toFixed(2)}. Ubicación: Carolina, PR.`;
   return { startUTC, endUTC, title: sanitizeICS(title), desc: sanitizeICS(desc) };
 }
 
@@ -533,52 +534,55 @@ $("#next-month")?.addEventListener("click", () => {
   const el = document.getElementById(id);
   if (el) el.addEventListener("click", () => stepTo(1));
 });
+/* ===================== EmailJS ===================== */
 
-// Primero, inicializa EmailJS con tu Public Key
-emailjs.init("gDEXHVuu4ITzRiej6"); // Reemplaza con tu Public Key
+// Inicializar EmailJS correctamente
+emailjs.init("gDEXHVuu4ITzRiej6");
 
-// Configurar los parámetros de la plantilla para cliente
-const templateParamsCliente = {
-  name: "Nombre del Cliente",  // Reemplaza con la variable o el valor del cliente
-  email: "cliente@email.com",  // Reemplaza con la dirección de correo del cliente
-  service: "Corte",            // Servicio seleccionado
-  duration: "40",              // Duración del servicio
-  price: "$40",                // Precio del servicio
-  clientPhone: "123-456-7890", // Teléfono del cliente
-  // Agrega más datos si es necesario
-};
+/**
+ * Enviar correos (cliente + barbero) SOLO después de guardar reserva.
+ */
+function enviarCorreos() {
+  const datosCliente = {
+    name: $("#clientName").value.trim(),
+    clientEmail: $("#clientEmail").value.trim(),
+    clientPhone: $("#clientPhone").value.trim(),
+    service: selectedService.name,
+    duration: selectedService.duration,
+    price: `$${selectedService.price.toFixed(2)}`,
+    date: selectedDate.toISOString().split("T")[0],
+    time: selectedTime
+  };
 
-// Enviar el correo al cliente
-emailjs.send("service_j89eiti", "template_c6enijc", templateParamsCliente) 
-  .then(function(response) {
-    console.log("Correo enviado exitosamente al cliente", response);
-    alert("¡Cita confirmada! Revisa tu correo para más detalles.");
-  }, function(error) {
-    console.log("Error al enviar correo al cliente", error);
-    alert("Hubo un problema al enviar el correo. Intenta nuevamente.");
-  });
+  // --- Enviar al CLIENTE ---
+  emailjs
+    .send("service_4v8u0jp", "template_9p3kvki", {
+      name: datosCliente.name,
+      service: datosCliente.service,
+      duration: datosCliente.duration,
+      price: datosCliente.price,
+      date: datosCliente.date,
+      time: datosCliente.time,
+      clientPhone: datosCliente.clientPhone
+    })
+    .then(() => console.log("✔ Email enviado al cliente"))
+    .catch((err) => console.error("❌ Error cliente:", err));
 
-// Configurar los parámetros de la plantilla para el barbero
-const templateParamsBarbero = {
-  clientName: "Nombre del Cliente", // Nombre del cliente
-  clientEmail: "cliente@email.com", // Correo del cliente
-  clientPhone: "123-456-7890",     // Teléfono del cliente
-  service: "Corte",                // Servicio seleccionado
-  duration: "40",                  // Duración del servicio
-  date: "2023-10-30",              // Fecha de la cita
-  time: "10:00 AM",                // Hora de la cita
-  price: "$40",                    // Precio del servicio
-};
-
-// Enviar el correo al barbero
-emailjs.send("service_j89eiti", "template_3c5f70e", templateParamsBarbero)
-  .then(function(response) {
-    console.log("Correo enviado exitosamente al barbero", response);
-  }, function(error) {
-    console.log("Error al enviar correo al barbero", error);
-    alert("Hubo un problema al enviar el correo. Intenta nuevamente.");
-  });
-
+  // --- Enviar al BARBERO ---
+  emailjs
+    .send("service_4v8u0jp", "template_thz7as6", {
+      clientName: datosCliente.name,
+      clientEmail: datosCliente.clientEmail,
+      clientPhone: datosCliente.clientPhone,
+      service: datosCliente.service,
+      duration: datosCliente.duration,
+      price: datosCliente.price,
+      date: datosCliente.date,
+      time: datosCliente.time
+    })
+    .then(() => console.log("✔ Email enviado al barbero"))
+    .catch((err) => console.error("❌ Error barbero:", err));
+}
 
 /* ===================== Inicio ===================== */
 (function init() {
@@ -588,7 +592,7 @@ emailjs.send("service_j89eiti", "template_3c5f70e", templateParamsBarbero)
 
   // WhatsApp / Teléfono (no se guardan)
   const phone = "+19393976152".replace(/\D/g, "");
-  const wa = `https://wa.me/${phone}`;
+  const wa = `https://wa.me/19393976152`;
   ["whats-link", "cta-whatsapp", "cta-whatsapp-fab"].forEach((id) => {
     const a = document.getElementById(id);
     if (a) a.href = wa;
@@ -616,23 +620,6 @@ function resetAll() {
   enableReserveIfReady();
   renderHours();
   renderCalendar(viewYear, viewMonth);
-}
-
-// Delegación: funciona aunque muevas/regenere el botón
-document.addEventListener("click", (ev) => {
-  const btn = ev.target.closest("#reset-btn");
-  if (!btn) return;
-  ev.preventDefault();
-  resetAll();
-});
-
-const slides = document.querySelectorAll('.slide');
-const slider = document.querySelector('.slider');
-let current = 0;
-const total = slides.length;
-
-function showSlide(index) {
-  slider.style.transform = `translateX(-${index * 100}%)`;
 }
 
 // Autoplay cada 2 segundos
