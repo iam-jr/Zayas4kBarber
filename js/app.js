@@ -487,19 +487,20 @@ $("#next-month")?.addEventListener("click", () => {
 });
 /* ===================== EmailJS ===================== */
 
+
 // Inicializar EmailJS
 emailjs.init("gDEXHVuu4ITzRiej6"); // Tu Public Key
 
 // Botón de reserva
-$("#reserve-btn")?.addEventListener("click", () => {
+document.getElementById("reserve-btn")?.addEventListener("click", () => {
   if (!selectedDate || !selectedTime || !selectedService) return;
 
-  const clientName = $("#clientName")?.value?.trim();
-  const clientEmail = $("#clientEmail")?.value?.trim();
-  const clientPhone = $("#clientPhone")?.value?.trim();
+  const clientName = document.getElementById("clientName")?.value?.trim();
+  const clientEmail = document.getElementById("clientEmail")?.value?.trim();
+  const clientPhone = document.getElementById("clientPhone")?.value?.trim();
 
   if (!clientName || !clientEmail) {
-    toast("Por favor, ingresa todos los datos requeridos.");
+    alert("Por favor, ingresa todos los datos requeridos.");
     return;
   }
 
@@ -515,9 +516,9 @@ $("#reserve-btn")?.addEventListener("click", () => {
   };
 
   const datosBarbero = {
-    clientName: clientName,
-    clientEmail: clientEmail,
-    clientPhone: clientPhone,
+    name: clientName,
+    email: "zayas4ka@outlook.com",  // Email del barbero
+    phone: clientPhone,
     service: selectedService.name,
     duration: selectedService.duration,
     price: `$${selectedService.price.toFixed(2)}`,
@@ -527,20 +528,18 @@ $("#reserve-btn")?.addEventListener("click", () => {
 
   // Enviar ambos emails (Cliente + Barbero)
   Promise.all([
-    emailjs.send("service_4v8u0jp", "template_9p3kvki", datosCliente),    // Cliente
-    emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)     // Barbero
+    emailjs.send("service_4v8u0jp", "template_9p3kvki", datosCliente),
+    emailjs.send("service_4v8u0jp", "template_thz7as6", datosBarbero)
   ])
   .then(() => {
-    toast("¡Cita confirmada! Redirigiendo...");
-    setTimeout(() => window.location.href = "confirmation.html", 1200);
+    alert("¡Cita confirmada! Redirigiendo...");
+    window.location.href = "confirmation.html";
   })
   .catch((err) => {
-  console.error("❌ Error al enviar correos:", err);
-  alert(JSON.stringify(err)); // Muestra detalles del error
+    console.error("❌ Error al enviar correos:", err);
+    alert("Hubo un problema al enviar la cita. Revisa la consola para más detalles.");
+  });
 });
-
-});
-
 
 /* ===================== Inicio ===================== */
 (function init() {
