@@ -53,6 +53,8 @@
     }]
   }
   </script>
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+
 </head>
 <body>
   <!-- Header -->
@@ -62,7 +64,7 @@
       <img src="img/zayas4k.png" alt="Zayas4k Barber Logo">
     </div>
     <div class="brand-copy">
-      <h1 class="brand-title">Zayas4k Barber</h1>
+      <h1 class="brand-title">Zayas4ka Barber</h1>
       <p class="brand-sub">Carolina, Puerto Rico</p>
     </div>
   </div>
@@ -182,9 +184,10 @@
       </article>
 
       <!-- Step 3: Datos -->
+
       <article class="card" aria-labelledby="step3-title">
         <header class="card-head"><h3 id="step3-title">Tus datos</h3></header>
-        <form id="client-form" class="form-grid" novalidate>
+         <form id="client-form" class="form-grid" novalidate>
           <label>
             <span>Nombre</span>
             <input id="clientName" name="name" placeholder="Tu nombre" autocomplete="name" required />
@@ -193,13 +196,10 @@
             <span>Email</span>
             <input id="clientEmail" name="email" type="email" placeholder="tucorreo@email.com" autocomplete="email" required />
           </label>
-          <label>
-            <span>Teléfono</span>
-            <input id="clientPhone" name="tel" inputmode="tel" placeholder="+1 787 555 5555" autocomplete="tel" />
-          </label>
+        
         <label class="custom-select-label">
           
-  <span>Servicio</span>
+     <span>Servicio</span>
   <select id="serviceId" required>
     <option value="" disabled selected>Selecciona un servicio</option>
     <option value="Corte" data-duration="40" data-price="30">Corte — 40 min — $40</option>
@@ -208,7 +208,10 @@
     <option value="HouseCall" data-duration="60" data-price="100">House Call — 60 min — $100</option>
   </select>
 </label>
-
+  <label>
+            <span>Teléfono</span>
+            <input id="clientPhone" name="tel" inputmode="tel" placeholder="+1 787 555 5555" autocomplete="tel" />
+          </label>
           <div class="two-col">
             <label>
               <span>Duración</span>
@@ -238,24 +241,13 @@
 
   <!-- Opción de añadir a calendario después de reservar -->
   <div class="calendar-options">
-    <p class="calendar-note">Luego de reservar, añade tu cita al calendario en tu Smart Phone.</p>
-    <button id="add-ics" class="btn btn-ghost" disabled>Añadir a mi calendario</button>
+    <p class="calendar-note">Luego de hacer click en reservar, añade tu cita al calendario en tu Smart Phone.</p>
+    <a id="add-apple" class="btn btn-ghost disabled" href="#" target="_blank" rel="noopener" aria-disabled="true">Apple Calendar</a>
     <a id="add-google" class="btn btn-ghost disabled" href="#" target="_blank" rel="noopener">Google Calendar</a>
   </div>
 
   <p id="msg" class="status" role="status" aria-live="polite"></p>
 </article>
-
-<script>
-// Simulando la habilitación del botón "Reservar" cuando se seleccionan día, hora y servicio
-document.getElementById('reserve-btn').disabled = false; // Aquí lo habilitamos manualmente
-
-// Evento de clic para redirigir a confirmation.html
-document.getElementById('reserve-btn').addEventListener('click', function() {
-    // Aquí puedes añadir validaciones si es necesario (por ejemplo, si el usuario seleccionó un día, hora y servicio)
-    window.location.href = 'confirmation.html'; // Redirige a confirmation.html
-});
-</script>
 
 
     </section>
@@ -327,5 +319,10 @@ document.getElementById('reserve-btn').addEventListener('click', function() {
       });
     }
   </script>
+  <script type="text/javascript">
+  emailjs.init("gDEXHVuu4ITzRiej6");  // Reemplaza con tu public key
+</script>
+
+
 </body>
 </html>
