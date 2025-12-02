@@ -15,7 +15,10 @@
 <meta name="viewport" id="meta-viewport" content="width=device-width, initial-scale=0.92, maximum-scale=1.0, user-scalable=0, viewport-fit=cover">
 
 
-<script type="text/javascript" src="https://cdn.emailjs.com/sdk/4.0.0/email.min.js"></script>
+<script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+
 
 </head>
 <body>
@@ -271,6 +274,14 @@
 
 
   <script src="js/app.js" defer></script>
+  <script type="text/javascript">
+  (function(){
+    emailjs.init({
+      publicKey: "jjYhLtnOnvimVOzDu", // reemplaza con tu key real
+    });
+  })();
+</script>
+
 
 
 </body>
